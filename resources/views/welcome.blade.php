@@ -37,7 +37,7 @@
         .navbar a:hover {
             background-color: #ddd;
             border-radius: 10px;
-            color: black;
+            color: rgb(0, 0, 0);
         }
 
         .container {
@@ -109,7 +109,7 @@
     </span>
 
     <footer class="bg-light text-center py-3">
-        <p>&copy; 2023 My Website. All rights reserved.</p>
+        <p>&copy; 2025 My Website. All rights reserved.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

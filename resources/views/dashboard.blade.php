@@ -4,17 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Responsive Vertical Navigation</title>
+  <title>Dashboard Puskesmas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f7ff;
     }
 
     .underline-center {
       width: 140px;
       height: 4px;
-      background-color: #333;
+      background-color: #003f66;
       margin: 10px auto 20px;
     }
 
@@ -29,54 +31,56 @@
 
     .sidenav {
       height: 100vh;
-      width: 200px;
+      width: 220px;
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #2E7D32;
+      background-color: #005f99;
       padding-top: 20px;
       transition: transform 0.3s ease-in-out;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
     }
 
     .sidenav a {
-      padding: 12px 16px;
+      padding: 12px 18px;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
       color: white;
       display: block;
       transition: background-color 0.3s;
     }
 
     .sidenav a:hover {
-      background-color: #4CAF50;
+      background-color: #0077c0;
     }
 
     .sidenav a.active {
-      background-color: #66BB6A;
-      font-weight: bold;
+      background-color: #004f80;
+      font-weight: 600;
     }
 
     .user-name {
       display: block;
       text-align: end;
-      margin-left: 200px;
-      padding: 10px;
-      background-color: rgb(69, 221, 77);
+      margin-left: 220px;
+      padding: 12px;
+      background-color: #004f80;
+      color: white;
     }
 
     .content {
-      margin-left: 200px;
-      padding: 20px;
-      background-color: #E9F5EC;
+      margin-left: 220px;
+      padding: 24px;
+      background-color: #f0f7ff;
+      min-height: 100vh;
     }
 
-    /* Hamburger menu */
     .menu-toggle {
       display: none;
       position: fixed;
       top: 15px;
       left: 15px;
-      background-color: #2E7D32;
+      background-color: #005f99;
       color: white;
       padding: 10px 12px;
       border: none;
@@ -85,11 +89,10 @@
       border-radius: 4px;
     }
 
-    /* Responsive rules */
     @media screen and (max-width: 768px) {
       .sidenav {
         transform: translateX(-100%);
-        width: 180px;
+        width: 200px;
       }
 
       .sidenav.open {
@@ -107,42 +110,41 @@
     }
 
     .dropdown {
-    position: relative;
-  }
+      position: relative;
+    }
 
-  .dropdown-menu {
-    display: none;
-    background-color: #3e8e41;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    z-index: 1;
-    min-width: 180px;
-  }
+    .dropdown-menu {
+      display: none;
+      background-color: #0077c0;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      z-index: 1;
+      min-width: 180px;
+    }
 
-  .dropdown-menu a {
-    color: white;
-    padding: 10px 16px;
-    display: block;
-    text-decoration: none;
-  }
+    .dropdown-menu a {
+      color: white;
+      padding: 10px 16px;
+      display: block;
+      text-decoration: none;
+    }
 
-  .dropdown-menu a:hover {
-    background-color: #66BB6A;
-  }
+    .dropdown-menu a:hover {
+      background-color: #005f99;
+    }
 
-  .dropdown:hover .dropdown-menu {
-    display: block;
-  }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
 
-  /* Optional untuk tampil vertikal */
-  .nav-item {
-    position: relative;
-  }
+    .nav-item {
+      position: relative;
+    }
 
-  .dropdown-toggle {
-    cursor: pointer;
-  }
+    .dropdown-toggle {
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -151,45 +153,44 @@
   <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 
   <div class="sidenav" id="sidenav">
-    <h1 style="text-align:center; color: white;">Dashboard</h1>
+    <h1 style="text-align:center; color: white; font-size: 22px;">Dashboard</h1>
     <div class="underline-center"></div>
     <div class="logo">
       <img src="{{ asset('images/kementerian-kesehatan.jpg') }}" alt="Logo" onclick="handleLogoClick()">
     </div>
 
-<div class="nav-item">
-  <a href="/content/home" class="active">Home</a>
-</div>
+    <div class="nav-item">
+      <a href="/content/home" class="active">Home</a>
+    </div>
 
-<div class="nav-item">
-  <a href="/content/data-pengguna">Data Pengguna</a>
-</div>
+    <div class="nav-item">
+      <a href="/content/data-pengguna">Data Pengguna</a>
+    </div>
 
-<div class="nav-item dropdown">
-  <a href="/content/data-pasien" class="dropdown-toggle">Data Pasien</a>
-  <div class="dropdown-menu">
-    <a href="/content/about/struktur">Registrasi Berobat</a>
-    <a href="/content/about/visi-misi">Info Data Pasien</a>
-  </div>
-</div>
+    <div class="nav-item dropdown">
+      <a href="/content/data-pasien" class="dropdown-toggle">Data Pasien</a>
+      <div class="dropdown-menu">
+        <a href="/content/about/struktur">Registrasi Berobat</a>
+        <a href="/content/about/visi-misi">Info Data Pasien</a>
+      </div>
+    </div>
 
-<div class="nav-item">
-  <a href="/content/contact">Rekam Medis</a>
-</div>
+    <div class="nav-item">
+      <a href="/content/contact">Rekam Medis</a>
+    </div>
 
-<div class="nav-item">
-  <a href="/content/contact">Farmasi</a>
-</div>
-
+    <div class="nav-item">
+      <a href="/content/contact">Farmasi</a>
+    </div>
   </div>
 
   @auth
   <div class="user-name">
-    <h3>Hallo, <span id="user-name">{{ Auth::user()->name }}</span>!</h3>
+    <h3>Halo, <span id="user-name">{{ Auth::user()->name }}</span>!</h3>
   </div>
   @else
   <div class="user-name">
-    <h3>Hallo, <span id="user-name">Riski Sembiring</span>!</h3>
+    <h3>Halo, <span id="user-name">Hikame</span>!</h3>
   </div>
   @endauth
 
@@ -225,7 +226,7 @@
         navLinks.forEach(l => l.classList.remove('active'));
         this.classList.add('active');
         loadContent(this.getAttribute('href'));
-        closeSidebar(); // otomatis tutup di mobile
+        closeSidebar();
       });
     });
 

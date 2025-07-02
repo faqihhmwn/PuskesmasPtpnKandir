@@ -27,14 +27,14 @@
         }
         .login-header h4 {
             margin-top: 10px;
-            color: #2e7d32;
+            color: #004804;
         }
         .btn-login {
-            background-color: #2e7d32;
+            background-color: #004503;
             color: white;
         }
         .btn-login:hover {
-            background-color: #256728;
+            background-color: #004804;
         }
     </style>
 </head>

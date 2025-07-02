@@ -26,3 +26,6 @@ Route::get('/content/contact', function () {
     return view('partials.contact');
 });
 
+Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
+
+

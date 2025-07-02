@@ -7,8 +7,7 @@
         display: block;
         margin: 0 auto;
         width: 400px;
-        height: 400px;
-        border-radius: 40%;
+        border-radius: 0%;
     }
 
     text {
@@ -17,8 +16,8 @@
     }
 </style>
 <div class="container">
-    <h2>Selamat Datang di Sistem Informasi Pelayanan Pasien Puskesmas Glugur Darat</h2>
-    <img src="{{ asset('images/Logo_Puskesmas.jpg') }}" alt="Logo">
-    <text>Puskesmas Glugur Darat</text>
-    <text>Jl. Pendidikan No.8 Glugur Darat I Kec. Medan Timur, Sumata Utara 20238</text>
+    <h2>Selamat Datang di Sistem Informasi Fasilitas Kesehatan PT Perkebunan Nusantara 7</h2>
+    <img src="{{ asset('images\Logo_Holding_Perkebunan_Nusantara.png') }}" alt="Logo">
+    <text>Faskes PTPN7 Kandir</text>
+    <text> Komplek PTPN VII Jl. Teuku Umar No.300, Sidodadi, Kec. Kedaton, Kota Bandar Lampung, Lampung 35132</text>
 </div>

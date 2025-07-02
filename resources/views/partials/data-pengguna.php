@@ -75,7 +75,7 @@
     .form button {
         padding: 10px 20px;
         margin-right: 10px;
-        background-color: #2E7D32;
+        background-color: #0077c0;
         color: white;
         border: none;
         border-radius: 5px;
@@ -85,7 +85,7 @@
     }
 
     .form button:hover {
-        background-color: #388E3C;
+        background-color: #0077c0;
     }
 
     @media (max-width: 600px) {
@@ -197,7 +197,7 @@
 
     <h2>Daftar Pengguna</h2>
     <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-        <thead style="background-color: #4CAF50; color: white;">
+        <thead style="background-color: #0077c0 ; color: white;">
             <tr>
                 <th>No</th>
                 <th>ID Pengguna</th>
@@ -210,7 +210,7 @@
             <tr>
                 <td>1</td>
                 <td>USR001</td>
-                <td>Riski Sembiring</td>
+                <td>Faqih Himawan</td>
                 <td>Admin</td>
                 <td>Laki-laki</td>
             </tr>
