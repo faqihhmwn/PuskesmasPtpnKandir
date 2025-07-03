@@ -287,7 +287,7 @@
 
 
     <br>
-    <button type="submit">Simpan Seluruh Data</button>
+    <button type="submit">Simpan Data</button>
 </form>
 
 </body>
