@@ -26,6 +26,10 @@ Route::get('/content/contact', function () {
     return view('partials.contact');
 });
 
+Route::get('/content/rekap-biaya', function () {
+    return view('partials.rekap-biaya');
+});
+
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
 Route::post('/obat/import', [ObatController::class, 'import'])->name('obat.import');
