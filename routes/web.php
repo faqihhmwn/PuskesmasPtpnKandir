@@ -32,9 +32,12 @@ Route::get('/content/rekap-biaya', function () {
 
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
-Route::post('/obat/import', [ObatController::class, 'import'])->name('obat.import');
+Route::get('/content/data-obat', function () {
+    return view('partials.data-obat'); 
+});
 
-Route::get('/obat', [ObatController::class, 'index'])->name('obat.index');
+
+
 
 
 

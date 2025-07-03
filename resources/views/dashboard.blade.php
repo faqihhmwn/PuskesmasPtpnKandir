@@ -180,7 +180,7 @@
     </div>
 
     <div class="nav-item">
-      <a href="/content/contact">Farmasi</a>
+      <a href="/content/data-obat">Farmasi</a>
     </div>
 
     <div class="nav-item">
