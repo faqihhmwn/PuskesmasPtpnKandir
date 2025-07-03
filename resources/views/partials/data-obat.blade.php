@@ -82,7 +82,7 @@
                 <tr>
                     <td>1</td>
                     <td>Paracetamol</td>
-                    <td><input type="number" placeholder="Harga"></td>
+                    <td><input type="text" class="currency" placeholder="Rp 0"></td>
                     <td><input type="number" placeholder="Sisa Stok"></td>
                     <td><input type="number" placeholder="Stok Masuk"></td>
                     <!-- 31 kolom tanggal -->
@@ -114,13 +114,43 @@
                     <td><input type="number" value="0"></td>
                     <td><input type="number" value="0"></td>
                     <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
                     <!-- Otomatis -->
-                    <td><input type="number" readonly></td>
-                    <td><input type="number" readonly></td>
-                </tr>
+
+                    <!-- Jumlah Obat Keluar -->
+                    <td><input type="number" placeholder="Jumlah Keluar"></td>
+
+                    <!-- Total Biaya -->
+                     <td><input type="text" class="currency" placeholder="Rp 0"></td>
+                            </tr>
             </tbody>
         </table>
     </div>
 
+    <script>
+        // Format input ke rupiah saat user mengetik
+        document.querySelectorAll('.currency').forEach(input => {
+            input.addEventListener('input', function () {
+                let numberString = this.value.replace(/[^,\d]/g, '').toString();
+                let split = numberString.split(',');
+                let sisa = split[0].length % 3;
+                let rupiah = split[0].substr(0, sisa);
+                let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    let separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+
+                rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+                this.value = 'Rp ' + rupiah;
+            });
+        });
+    </script>
+    
 </body>
 </html>
+
+
