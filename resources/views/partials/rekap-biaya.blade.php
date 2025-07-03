@@ -47,7 +47,7 @@
 
 <div class="container">
     <h2>Form Input Rekapitulasi Biaya Kesehatan per Bulan</h2>
-    <form method="POST" action="{{ route('biaya.create') }}">
+    <form method="POST" action="{{ route('biaya.store') }}">
         @csrf
 
         <table>
