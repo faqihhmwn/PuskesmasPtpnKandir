@@ -182,6 +182,10 @@
     <div class="nav-item">
       <a href="/content/contact">Farmasi</a>
     </div>
+
+    <div class="nav-item">
+      <a href="/content/contact">Rekapitulasi Biaya</a>
+    </div>
   </div>
 
   @auth
