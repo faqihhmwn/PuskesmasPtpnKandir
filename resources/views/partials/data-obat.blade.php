@@ -2,132 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tabel Obat Lengkap</title>
+    <title>Rekapitulasi Obat</title>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
 
         h1 {
-            text-align: center;
-            margin-bottom: 20px;
+            text-align: left;
+            margin-bottom: 30px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .table-container {
+            background-color: #f3f3f3;
+            padding: 20px;
+            border-radius: 10px;
             overflow-x: auto;
         }
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 6px;
-            text-align: center;
-            font-size: 12px;
+        table {
+            width: max-content;
+            min-width: 100%;
+            border-collapse: collapse;
         }
 
         thead {
             background-color: #0077c0;
             color: white;
-            position: sticky;
-            top: 0;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+            white-space: nowrap;
         }
 
         input[type="number"] {
-            width: 70px;
+            width: 60px;
         }
 
-        .container {
-            overflow-x: scroll;
+        input[type="text"] {
+            width: 100px;
         }
 
-        .readonly {
-            background-color: #f0f0f0;
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tfoot {
+            background-color: #e0e0e0;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Rekapitulasi Obat</h1>
-    <div class="container">
-        <table id="tabelObat">
+
+    <h1>Rekapitulasi Penggunaan Obat - Mei 2025</h1>
+
+    <div class="table-container">
+        <table>
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Harga Satuan</th>
-                    <th>Sisa Stok</th>
-                    <th>Stok Masuk</th>
-                    <!-- Kolom tanggal 1-31 -->
-                    <!-- Disisipkan via JS -->
-                    <th>Jumlah Keluar</th>
-                    <th>Total Biaya</th>
+                    <th rowspan="2">No</th>
+                    <th rowspan="2">Nama Obat</th>
+                    <th rowspan="2">Harga Satuan</th>
+                    <th rowspan="2">Sisa Stok Bulan Lalu</th>
+                    <th rowspan="2">Stok Masuk</th>
+                    <th colspan="31">Tanggal</th>
+                    <th rowspan="2">Jumlah Obat Keluar</th>
+                    <th rowspan="2">Total Biaya</th>
+                </tr>
+                <tr>
+                    <!-- Tanggal 1 sampai 31 -->
+                    <!-- Gunakan JavaScript jika ingin buat otomatis -->
+                    ${Array.from({length: 31}, (_, i) => `<th>${i + 1}</th>`).join('')}
                 </tr>
             </thead>
-            <tbody id="obatBody">
-                <!-- Data obat akan disisipkan via JS -->
+            <tbody>
+                <!-- Contoh satu baris -->
+                <tr>
+                    <td>1</td>
+                    <td>Paracetamol</td>
+                    <td><input type="number" placeholder="Harga"></td>
+                    <td><input type="number" placeholder="Stok Lalu"></td>
+                    <td><input type="number" placeholder="Stok Masuk"></td>
+                    ${Array.from({length: 31}, () => `<td><input type="number" min="0" value="0"></td>`).join('')}
+                    <td><input type="number" readonly></td>
+                    <td><input type="number" readonly></td>
+                </tr>
+                <!-- Tambah baris lain sesuai jumlah obat -->
             </tbody>
         </table>
     </div>
 
-    <script>
-        const namaObat = [
-            "Paracetamol", "Amoxicillin", "Ibuprofen", "Cetirizine", "Omeprazole"
-            // Tambahkan sampai 200 atau ambil dari backend
-        ];
-
-        const tbody = document.getElementById('obatBody');
-        const theadRow = document.querySelector('thead tr');
-
-        // Sisipkan kolom tanggal 1-31
-        for (let i = 1; i <= 31; i++) {
-            const th = document.createElement('th');
-            th.textContent = i;
-            theadRow.insertBefore(th, theadRow.children[5]); // Sebelum "Jumlah Keluar"
-        }
-
-        // Buat baris untuk setiap obat
-        namaObat.forEach((nama, index) => {
-            const tr = document.createElement('tr');
-
-            // Kolom: No, Nama Obat, Harga, Sisa, Masuk
-            tr.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${nama}</td>
-                <td><input type="number" class="harga" /></td>
-                <td><input type="number" class="sisa" /></td>
-                <td><input type="number" class="masuk" /></td>
-            `;
-
-            // Kolom tanggal 1-31
-            for (let t = 1; t <= 31; t++) {
-                tr.innerHTML += `<td><input type="number" class="harian" value="0" /></td>`;
-            }
-
-            // Kolom Jumlah Keluar dan Total Biaya
-            tr.innerHTML += `
-                <td><input type="number" class="keluar readonly" readonly /></td>
-                <td><input type="number" class="total readonly" readonly /></td>
-            `;
-
-            tbody.appendChild(tr);
-        });
-
-        // Kalkulasi otomatis
-        document.addEventListener('input', () => {
-            const rows = document.querySelectorAll('#obatBody tr');
-            rows.forEach(row => {
-                const harga = parseFloat(row.querySelector('.harga')?.value) || 0;
-                const harian = row.querySelectorAll('.harian');
-                let totalKeluar = 0;
-
-                harian.forEach(input => {
-                    totalKeluar += parseFloat(input.value) || 0;
-                });
-
-                row.querySelector('.keluar').value = totalKeluar;
-                row.querySelector('.total').value = totalKeluar * harga;
-            });
-        });
-    </script>
 </body>
 </html>
