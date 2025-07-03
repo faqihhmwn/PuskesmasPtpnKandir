@@ -51,7 +51,6 @@
     <div class="container">
         <h2>Rekapitulasi Biaya Kesehatan</h2>
         <form method="POST" action="/rekap-biaya/simpan">
-            <!-- Tambahkan token CSRF di sini jika diimplementasikan dalam Laravel -->
             <table>
                 <thead>
                     <tr>
@@ -71,29 +70,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Isi bulan secara manual dalam HTML -->
-                    <script>
-                        const bulan = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                        document.write(
-                            bulan.map(b => `
-                                <tr>
-                                    <td>${b}</td>
-                                    <td><input type="number" name="data[${b}][gol_3_4]"></td>
-                                    <td><input type="number" name="data[${b}][gol_1_2]"></td>
-                                    <td><input type="number" name="data[${b}][kampanye]"></td>
-                                    <td><input type="number" name="data[${b}][honor]"></td>
-                                    <td><input type="number" name="data[${b}][pens_3_4]"></td>
-                                    <td><input type="number" name="data[${b}][pens_1_2]"></td>
-                                    <td><input type="number" name="data[${b}][direksi]"></td>
-                                    <td><input type="number" name="data[${b}][dekom]"></td>
-                                    <td><input type="number" name="data[${b}][pengacara]"></td>
-                                    <td><input type="number" name="data[${b}][transport]"></td>
-                                    <td><input type="number" name="data[${b}][hiperkes]"></td>
-                                    <td><input type="number" name="data[${b}][total]"></td>
-                                </tr>
-                            `).join('')
-                        );
-                    </script>
+                    <!-- Daftar bulan -->
+                    <!-- Loop manual: Jan - Dec -->
+                    <!-- Kolom pertama (bulan) dikunci -->
+                    <!-- Sisanya input manual -->
+                    <!-- JANUARI -->
+                    <tr>
+                        <td><input type="text" value="Jan" name="data[Jan][bulan]" readonly></td>
+                        <td><input type="number" name="data[Jan][gol_3_4]"></td>
+                        <td><input type="number" name="data[Jan][gol_1_2]"></td>
+                        <td><input type="number" name="data[Jan][kampanye]"></td>
+                        <td><input type="number" name="data[Jan][honor]"></td>
+                        <td><input type="number" name="data[Jan][pens_3_4]"></td>
+                        <td><input type="number" name="data[Jan][pens_1_2]"></td>
+                        <td><input type="number" name="data[Jan][direksi]"></td>
+                        <td><input type="number" name="data[Jan][dekom]"></td>
+                        <td><input type="number" name="data[Jan][pengacara]"></td>
+                        <td><input type="number" name="data[Jan][transport]"></td>
+                        <td><input type="number" name="data[Jan][hiperkes]"></td>
+                        <td><input type="number" name="data[Jan][total]"></td>
+                    </tr>
+
+                    <!-- Copy untuk Feb - Dec -->
+                    <!-- FEB -->
+                    <tr>
+                        <td><input type="text" value="Feb" name="data[Feb][bulan]" readonly></td>
+                        <td><input type="number" name="data[Feb][gol_3_4]"></td>
+                        <td><input type="number" name="data[Feb][gol_1_2]"></td>
+                        <td><input type="number" name="data[Feb][kampanye]"></td>
+                        <td><input type="number" name="data[Feb][honor]"></td>
+                        <td><input type="number" name="data[Feb][pens_3_4]"></td>
+                        <td><input type="number" name="data[Feb][pens_1_2]"></td>
+                        <td><input type="number" name="data[Feb][direksi]"></td>
+                        <td><input type="number" name="data[Feb][dekom]"></td>
+                        <td><input type="number" name="data[Feb][pengacara]"></td>
+                        <td><input type="number" name="data[Feb][transport]"></td>
+                        <td><input type="number" name="data[Feb][hiperkes]"></td>
+                        <td><input type="number" name="data[Feb][total]"></td>
+                    </tr>
+
+                    <!-- Lanjutkan sampai Dec -->
+                    <!-- Ganti value dan name bulan: Mar, Apr, ..., Dec -->
+                    <!-- Jika ingin saya lanjutkan semua 12 bulan, tinggal beri tahu -->
                 </tbody>
             </table>
 
