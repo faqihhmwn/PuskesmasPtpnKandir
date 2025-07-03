@@ -1,6 +1,6 @@
-@extends(view: 'partials.rekap-biaya')
+@extends(view: 'layouts.app')
 
-@section('/content/rekap-biaya')
+@section('content')
 <style>
     table {
         width: 100%;
