@@ -1,128 +1,131 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rekap Obat Bulanan</title>
+    <title>Tabel Obat Lengkap</title>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
 
         h1 {
+            text-align: center;
             margin-bottom: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px;
-        }
-
-        thead {
-            background-color: #0077c0;
-            color: white;
+            overflow-x: auto;
         }
 
         th, td {
             border: 1px solid #ccc;
             padding: 6px;
             text-align: center;
+            font-size: 12px;
         }
 
-        tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
+        thead {
+            background-color: #0077c0;
+            color: white;
+            position: sticky;
+            top: 0;
         }
 
         input[type="number"] {
             width: 70px;
-            padding: 3px;
-            font-size: 12px;
         }
 
-        input[readonly] {
-            background-color: #eee;
+        .container {
+            overflow-x: scroll;
+        }
+
+        .readonly {
+            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
-
-    <h1>Rekapitulasi Obat Bulanan</h1>
-    <div style="overflow-x:auto;">
-        <table id="obatTable">
+    <h1>Rekapitulasi Obat</h1>
+    <div class="container">
+        <table id="tabelObat">
             <thead>
-                <tr id="headerRow">
+                <tr>
                     <th>No</th>
                     <th>Nama Obat</th>
                     <th>Harga Satuan</th>
                     <th>Sisa Stok</th>
                     <th>Stok Masuk</th>
-                    <!-- Kolom tanggal disisipkan dengan JS -->
+                    <!-- Kolom tanggal 1-31 -->
+                    <!-- Disisipkan via JS -->
                     <th>Jumlah Keluar</th>
                     <th>Total Biaya</th>
                 </tr>
             </thead>
-            <tbody id="tableBody">
-                <!-- Baris akan ditambahkan oleh JS -->
+            <tbody id="obatBody">
+                <!-- Data obat akan disisipkan via JS -->
             </tbody>
         </table>
     </div>
 
     <script>
         const namaObat = [
-            "Paracetamol", "Amoxicillin", "Ibuprofen", "Vitamin C", "Cetirizine"
-            // Tambahkan sisa 195 nama dari file Excel kamu
+            "Paracetamol", "Amoxicillin", "Ibuprofen", "Cetirizine", "Omeprazole"
+            // Tambahkan sampai 200 atau ambil dari backend
         ];
 
-        const tanggalHari = (bulan = new Date().getMonth(), tahun = new Date().getFullYear()) => {
-            return new Date(tahun, bulan + 1, 0).getDate(); // jumlah hari dalam bulan
-        }
+        const tbody = document.getElementById('obatBody');
+        const theadRow = document.querySelector('thead tr');
 
-        const days = tanggalHari();
-        const headerRow = document.getElementById('headerRow');
-
-        for (let i = 1; i <= days; i++) {
+        // Sisipkan kolom tanggal 1-31
+        for (let i = 1; i <= 31; i++) {
             const th = document.createElement('th');
             th.textContent = i;
-            headerRow.insertBefore(th, headerRow.children[5]); // sebelum 'Jumlah Keluar'
+            theadRow.insertBefore(th, theadRow.children[5]); // Sebelum "Jumlah Keluar"
         }
 
-        const tableBody = document.getElementById('tableBody');
-
+        // Buat baris untuk setiap obat
         namaObat.forEach((nama, index) => {
             const tr = document.createElement('tr');
 
+            // Kolom: No, Nama Obat, Harga, Sisa, Masuk
             tr.innerHTML = `
                 <td>${index + 1}</td>
                 <td>${nama}</td>
                 <td><input type="number" class="harga" /></td>
                 <td><input type="number" class="sisa" /></td>
                 <td><input type="number" class="masuk" /></td>
-                ${[...Array(days)].map((_, i) => `<td><input type="number" class="tanggal" data-row="${index}" /></td>`).join('')}
-                <td><input type="number" class="keluar" readonly /></td>
-                <td><input type="number" class="total" readonly /></td>
             `;
 
-            tableBody.appendChild(tr);
+            // Kolom tanggal 1-31
+            for (let t = 1; t <= 31; t++) {
+                tr.innerHTML += `<td><input type="number" class="harian" value="0" /></td>`;
+            }
+
+            // Kolom Jumlah Keluar dan Total Biaya
+            tr.innerHTML += `
+                <td><input type="number" class="keluar readonly" readonly /></td>
+                <td><input type="number" class="total readonly" readonly /></td>
+            `;
+
+            tbody.appendChild(tr);
         });
 
-        // Event listener global untuk hitung otomatis
-        document.addEventListener('input', function () {
-            const rows = document.querySelectorAll('#tableBody tr');
-
+        // Kalkulasi otomatis
+        document.addEventListener('input', () => {
+            const rows = document.querySelectorAll('#obatBody tr');
             rows.forEach(row => {
-                const harga = +row.querySelector('.harga')?.value || 0;
-                const tanggalInputs = row.querySelectorAll('.tanggal');
-                let jumlahKeluar = 0;
+                const harga = parseFloat(row.querySelector('.harga')?.value) || 0;
+                const harian = row.querySelectorAll('.harian');
+                let totalKeluar = 0;
 
-                tanggalInputs.forEach(input => {
-                    jumlahKeluar += +input.value || 0;
+                harian.forEach(input => {
+                    totalKeluar += parseFloat(input.value) || 0;
                 });
 
-                const keluarInput = row.querySelector('.keluar');
-                const totalInput = row.querySelector('.total');
-
-                keluarInput.value = jumlahKeluar;
-                totalInput.value = harga * jumlahKeluar;
+                row.querySelector('.keluar').value = totalKeluar;
+                row.querySelector('.total').value = totalKeluar * harga;
             });
         });
     </script>
