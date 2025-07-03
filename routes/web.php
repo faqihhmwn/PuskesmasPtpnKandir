@@ -35,17 +35,10 @@ Route::get('/content/rekap-biaya', function () {
     return view('partials.rekap-biaya');
 })->name('biaya.create');
 
-Route::post('/rekap-biaya/simpan', [BiayaController::class, 'store'])->name('biaya.store');
+Route::post('/content/rekap-biaya', [BiayaController::class, 'store'])->name('biaya.store');
 
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
 Route::get('/content/data-obat', function () {
     return view('partials.data-obat'); 
 });
-
-
-
-
-
-
-
