@@ -28,7 +28,7 @@ Route::get('/content/contact', function () {
 
 Route::get('/content/rekap-biaya', function () {
     return view('partials.rekap-biaya');
-})->name('biaya.create');
+})->name('biaya.store');
 
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
