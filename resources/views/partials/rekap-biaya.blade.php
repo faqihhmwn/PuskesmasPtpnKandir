@@ -1,19 +1,35 @@
-@extends('layouts.app') {{-- Sesuaikan dengan layout utama Laravel milikmu --}}
+@extends('layouts.app')
 
 @section('content')
 <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h1, h2 {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .form {
+        margin-bottom: 30px;
+        background-color: #f3f3f3;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     table, th, td {
-        border: 1px solid #999;
+        border: 1px solid #ccc;
     }
 
     th, td {
-        padding: 8px;
+        padding: 10px;
         text-align: center;
     }
 
@@ -24,9 +40,9 @@
 
     input[type="number"] {
         width: 100%;
-        padding: 6px;
-        border: 1px solid #ccc;
+        padding: 8px;
         border-radius: 4px;
+        border: 1px solid #ccc;
     }
 
     .submit-btn {
@@ -36,24 +52,24 @@
         color: white;
         border: none;
         border-radius: 5px;
-        cursor: pointer;
         font-weight: bold;
+        cursor: pointer;
     }
 
     .submit-btn:hover {
-        background-color: #005f99;
+        background-color: #005fa3;
     }
 </style>
 
 <div class="container">
-    <h2>Form Input Rekapitulasi Biaya Kesehatan per Bulan</h2>
+    <h1>Rekapitulasi Biaya Kesehatan</h1>
+
     <form method="POST" action="{{ route('biaya.store') }}">
         @csrf
-
         <table>
             <thead>
                 <tr>
-                    <th>Rekap Bulan</th>
+                    <th>Rekap Per Bulan</th>
                     <th>Gol. III-IV</th>
                     <th>Gol. I-II</th>
                     <th>Kampanye</th>
@@ -72,24 +88,20 @@
                 @foreach (['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] as $bulan)
                 <tr>
                     <td>{{ $bulan }}</td>
-                    <td><input type="number" name="data[{{ $bulan }}][gol_3_4]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][gol_1_2]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][kampanye]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][honor]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][pens_3_4]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][pens_1_2]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][direksi]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][dekom]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][pengacara]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][transport]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][hiperkes]" /></td>
-                    <td><input type="number" name="data[{{ $bulan }}][total]" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][gol_3_4]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][gol_1_2]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][kampanye]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][honor]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][pens_3_4]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][pens_1_2]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][direksi]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][dekom]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][pengacara]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][transport]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][hiperkes]" placeholder="Rp" /></td>
+                    <td><input type="number" name="data[{{ $bulan }}][total]" placeholder="Rp" /></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
-        <button type="submit" class="submit-btn">Simpan Rekap</button>
-    </form>
-</div>
-@endsection
