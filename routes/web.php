@@ -28,4 +28,9 @@ Route::get('/content/contact', function () {
 
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
+use Illuminate\Support\Facades\Route;
+
+Route::get('/content/rekap-biaya', function () {
+    return view('content.rekap-biaya');
+});
 
