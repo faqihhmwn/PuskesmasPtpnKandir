@@ -8,6 +8,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 30px;
+            table-layout: fixed;
         }
 
         table, th, td {
@@ -17,6 +18,7 @@
         th, td {
             padding: 8px;
             text-align: center;
+            vertical-align: middle;
         }
 
         th {
@@ -24,11 +26,28 @@
             color: white;
         }
 
-        input[type="number"] {
+        /* Lebar kolom */
+        th:first-child,
+        td:first-child {
+            width: 8%;
+        }
+
+        th:not(:first-child),
+        td:not(:first-child) {
+            width: 7.7%;
+        }
+
+        input[type="number"],
+        input[type="text"] {
             width: 100%;
             padding: 6px;
+            box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+
+        input[readonly] {
+            background-color: #f5f5f5;
         }
 
         .submit-btn {
@@ -86,8 +105,6 @@
                         <td><input type="number" name="data[Jan][total]"></td>
                     </tr>
 
-                    <!-- Copy untuk Feb - Dec -->
-                    <!-- FEB -->
                     <tr>
                         <td><input type="text" value="Feb" name="data[Feb][bulan]" readonly></td>
                         <td><input type="number" name="data[Feb][gol_3_4]"></td>
