@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rekapitulasi Obat</title>
+    <title>Rekapitulasi Obat Bulanan</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #eaf4ff;
         }
 
         h1 {
@@ -38,12 +39,8 @@
             white-space: nowrap;
         }
 
-        input[type="number"] {
-            width: 60px;
-        }
-
-        input[type="text"] {
-            width: 100px;
+        input[type="number"], input[type="text"] {
+            width: 80px;
         }
 
         tbody tr:nth-child(even) {
@@ -58,7 +55,7 @@
 </head>
 <body>
 
-    <h1>Rekapitulasi Penggunaan Obat - Mei 2025</h1>
+    <h1>Rekapitulasi Obat Bulanan</h1>
 
     <div class="table-container">
         <table>
@@ -74,24 +71,53 @@
                     <th rowspan="2">Total Biaya</th>
                 </tr>
                 <tr>
-                    <!-- Tanggal 1 sampai 31 -->
-                    <!-- Gunakan JavaScript jika ingin buat otomatis -->
-                    ${Array.from({length: 31}, (_, i) => `<th>${i + 1}</th>`).join('')}
+                    <!-- Tanggal 1 - 31 -->
+                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                    <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                    <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th><th>26</th><th>27</th><th>28</th><th>29</th><th>30</th><th>31</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Contoh satu baris -->
+                <!-- Baris contoh -->
                 <tr>
                     <td>1</td>
                     <td>Paracetamol</td>
                     <td><input type="number" placeholder="Harga"></td>
-                    <td><input type="number" placeholder="Stok Lalu"></td>
+                    <td><input type="number" placeholder="Sisa Stok"></td>
                     <td><input type="number" placeholder="Stok Masuk"></td>
-                    ${Array.from({length: 31}, () => `<td><input type="number" min="0" value="0"></td>`).join('')}
+                    <!-- 31 kolom tanggal -->
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <td><input type="number" value="0"></td>
+                    <!-- Otomatis -->
                     <td><input type="number" readonly></td>
                     <td><input type="number" readonly></td>
                 </tr>
-                <!-- Tambah baris lain sesuai jumlah obat -->
             </tbody>
         </table>
     </div>
