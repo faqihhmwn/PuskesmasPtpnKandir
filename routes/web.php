@@ -18,7 +18,7 @@ Route::get('/content/data-pengguna', function () {
     return view('partials.data-pengguna');
 });
 
-Route::get('/content/data-pasien', function () {
+Route::get('/content/data-pasien', function (): Factory|View {
     return view('partials.data-pasien');
 });
 
