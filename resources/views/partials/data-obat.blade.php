@@ -53,7 +53,7 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Obat</th>
+                    <th>Nama</th>
                     <th>Harga Satuan</th>
                     <th>Sisa Stok</th>
                     <th>Stok Masuk</th>
