@@ -28,4 +28,10 @@ Route::get('/content/contact', function () {
 
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
+Route::post('/obat/import', [ObatController::class, 'import'])->name('obat.import');
+
+Route::get('/obat', [ObatController::class, 'index'])->name('obat.index');
+
+
+
 
