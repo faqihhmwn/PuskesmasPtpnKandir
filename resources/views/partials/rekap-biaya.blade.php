@@ -1,111 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Rekapitulasi Biaya Kesehatan</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 30px;
-            table-layout: fixed;
-        }
+  <meta charset="UTF-8">
+  <title>Rekapitulasi Biaya Kesehatan</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      table-layout: fixed;
+    }
 
-        table, th, td {
-            border: 1px solid #999;
-        }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
 
-        th, td {
-            padding: 8px;
-            text-align: center;
-            vertical-align: middle;
-        }
+    th {
+      background-color: #0077c0;
+      color: white;
+    }
 
-        th {
-            background-color: #0077c0;
-            color: white;
-        }
+    th[colspan] {
+      background-color: #005f99;
+      font-weight: bold;
+    }
 
-        /* Lebar kolom */
-        th:first-child,
-        td:first-child {
-            width: 8%;
-        }
+    th.group-header {
+      background-color: #004c78;
+    }
 
-        th:not(:first-child),
-        td:not(:first-child) {
-            width: 7.7%;
-        }
+    th:first-child,
+    td:first-child {
+      width: 8%;
+    }
 
-        input[type="number"],
-        input[type="text"] {
-            width: 100%;
-            padding: 6px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      padding: 6px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-        input[readonly] {
-            background-color: #f5f5f5;
-        }
+    input[readonly] {
+      background-color: #f5f5f5;
+    }
 
-        .submit-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #0077c0;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+    .submit-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0077c0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-        .submit-btn:hover {
-            background-color: #005f99;
-        }
-    </style>
+    .submit-btn:hover {
+      background-color: #005f99;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Rekapitulasi Biaya Kesehatan</h2>
-        <form method="POST" action="/rekap-biaya/simpan">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rekap Bulan</th>
-                        <th>Gol. III-IV</th>
-                        <th>Gol. I-II</th>
-                        <th>Kampanye</th>
-                        <th>Honor + ILA + OS</th>
-                        <th>Pens. III-IV</th>
-                        <th>Pens. I-II</th>
-                        <th>Direksi</th>
-                        <th>Dekom</th>
-                        <th>Pengacara</th>
-                        <th>Transport</th>
-                        <th>Hiperkes</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" value="Jan" name="data[Jan][bulan]" readonly></td>
-                        <td><input type="number" name="data[Jan][gol_3_4]"></td>
-                        <td><input type="number" name="data[Jan][gol_1_2]"></td>
-                        <td><input type="number" name="data[Jan][kampanye]"></td>
-                        <td><input type="number" name="data[Jan][honor]"></td>
-                        <td><input type="number" name="data[Jan][pens_3_4]"></td>
-                        <td><input type="number" name="data[Jan][pens_1_2]"></td>
-                        <td><input type="number" name="data[Jan][direksi]"></td>
-                        <td><input type="number" name="data[Jan][dekom]"></td>
-                        <td><input type="number" name="data[Jan][pengacara]"></td>
-                        <td><input type="number" name="data[Jan][transport]"></td>
-                        <td><input type="number" name="data[Jan][hiperkes]"></td>
-                        <td><input type="number" name="data[Jan][total]"></td>
-                    </tr>
+  <div class="container">
+    <h2>Rekapitulasi Biaya Kesehatan</h2>
+    <form method="POST" action="/rekap-biaya/simpan">
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="2">Rekap Bulan</th>
+            <th colspan="9" class="group-header">REAL BIAYA</th>
+            <th rowspan="2">Transport</th>
+            <th rowspan="2">Hiperkes</th>
+            <th rowspan="2">Total Biaya Kesehatan</th>
+          </tr>
+          <tr>
+            <th>Gol. III-IV</th>
+            <th>Gol. I-II</th>
+            <th>Kampanye</th>
+            <th>Honor + ILA + OS</th>
+            <th>Pens. III-IV</th>
+            <th>Pens. I-II</th>
+            <th>Direksi</th>
+            <th>Dekom</th>
+            <th>Pengacara</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Contoh satu baris, lanjutkan Jan–Dec -->
+          <tr>
+            <td><input type="text" value="Jan" name="data[Jan][bulan]" readonly></td>
+            <td><input type="number" name="data[Jan][gol_3_4]"></td>
+            <td><input type="number" name="data[Jan][gol_1_2]"></td>
+            <td><input type="number" name="data[Jan][kampanye]"></td>
+            <td><input type="number" name="data[Jan][honor]"></td>
+            <td><input type="number" name="data[Jan][pens_3_4]"></td>
+            <td><input type="number" name="data[Jan][pens_1_2]"></td>
+            <td><input type="number" name="data[Jan][direksi]"></td>
+            <td><input type="number" name="data[Jan][dekom]"></td>
+            <td><input type="number" name="data[Jan][pengacara]"></td>
+            <td><input type="number" name="data[Jan][transport]"></td>
+            <td><input type="number" name="data[Jan][hiperkes]"></td>
+            <td><input type="number" name="data[Jan][total]"></td>
+          </tr>
 
-                    <tr>
+          <tr>
                         <td><input type="text" value="Feb" name="data[Feb][bulan]" readonly></td>
                         <td><input type="number" name="data[Feb][gol_3_4]"></td>
                         <td><input type="number" name="data[Feb][gol_1_2]"></td>
@@ -273,11 +277,13 @@
                         <td><input type="number" name="data[Dec][hiperkes]"></td>
                         <td><input type="number" name="data[Dec][total]"></td>
                     </tr>
-                </tbody>
-            </table>
 
-            <button type="submit" class="submit-btn">Simpan Rekap</button>
-        </form>
-    </div>
+          <!-- Lanjutkan baris Feb sampai Dec dengan pola yang sama -->
+        </tbody>
+      </table>
+
+      <button type="submit" class="submit-btn">Simpan Rekap</button>
+    </form>
+  </div>
 </body>
 </html>
