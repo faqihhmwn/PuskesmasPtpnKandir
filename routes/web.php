@@ -33,12 +33,10 @@ Route::get('/content/rekap-biaya', function () {
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
 Route::get('/content/data-obat', function () {
-    return view('partials.data-obat'); // pastikan file `resources/views/partials/data-obat.blade.php` ada
+    return view('partials.data-obat'); 
 });
 
-Route::get('/content/import-obat', function () {
-    return view('partials.import-obat'); // buat file `import-obat.blade.php` di folder `partials`
-});
+
 
 
 
