@@ -1,51 +1,115 @@
-<div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-    <h2 style="color: #005f99; text-align: center;">Data Obat</h2>
-    <div class="underline-center" style="margin-bottom: 30px;"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Obat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
 
-    {{-- Form Import Excel --}}
-    <form action="{{ route('obat.import') }}" method="POST" enctype="multipart/form-data" style="margin-bottom: 20px;">
-        @csrf
-        <label for="file" style="font-weight: 600;">Import Data Obat (Excel)</label><br><br>
-        <input type="file" name="file" required style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;" />
-        <button type="submit" style="background-color: #005f99; color: white; padding: 10px 20px; border: none; border-radius: 6px; margin-left: 10px; cursor: pointer;">
-            Upload
-        </button>
-    </form>
+        h1 {
+            text-align: left;
+            margin-bottom: 30px;
+        }
 
-    {{-- Tampilkan pesan sukses --}}
-    @if(session('success'))
-        <div style="color: green; margin-bottom: 15px;">
-            {{ session('success') }}
-        </div>
-    @endif
+        .table-container {
+            background-color: #f3f3f3;
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-    {{-- Tabel Data Obat --}}
-    <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #0077c0;
+            color: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-edit {
+            background-color: #0077c0;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Obat</h1>
+    <div class="table-container">
+        <table>
             <thead>
-                <tr style="background-color: #0077c0; color: white;">
-                    <th style="padding: 12px; border: 1px solid #ddd;">#</th>
-                    <th style="padding: 12px; border: 1px solid #ddd;">Nama Obat</th>
-                    <th style="padding: 12px; border: 1px solid #ddd;">Jenis</th>
-                    <th style="padding: 12px; border: 1px solid #ddd;">Stok</th>
-                    <th style="padding: 12px; border: 1px solid #ddd;">Kadaluarsa</th>
+                <tr>
+                    <th>No</th>
+                    <th>Kode Obat</th>
+                    <th>Nama Obat</th>
+                    <th>Jenis</th>
+                    <th>Stok</th>
+                    <th>Satuan</th>
+                    <th>Harga</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($obats as $index => $obat)
-                    <tr style="background-color: #f9f9f9;">
-                        <td style="padding: 10px; border: 1px solid #ddd;">{{ $index + 1 }}</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">{{ $obat->nama }}</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">{{ $obat->jenis }}</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">{{ $obat->stok }}</td>
-                        <td style="padding: 10px; border: 1px solid #ddd;">{{ $obat->kadaluarsa }}</td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" style="text-align: center; padding: 20px;">Data obat belum tersedia.</td>
-                    </tr>
-                @endforelse
+                <!-- Contoh statis, ganti dengan data dinamis dari Laravel -->
+                <tr>
+                    <td>1</td>
+                    <td>OBT001</td>
+                    <td>Paracetamol</td>
+                    <td>Tablet</td>
+                    <td>100</td>
+                    <td>Strip</td>
+                    <td>5.000</td>
+                    <td class="actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Hapus</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>OBT002</td>
+                    <td>Amoxicillin</td>
+                    <td>Kapsul</td>
+                    <td>75</td>
+                    <td>Strip</td>
+                    <td>7.000</td>
+                    <td class="actions">
+                        <button class="btn btn-edit">Edit</button>
+                        <button class="btn btn-delete">Hapus</button>
+                    </td>
+                </tr>
+                <!-- Tambah data lainnya di sini -->
             </tbody>
         </table>
     </div>
-</div>
+</body>
+</html>
