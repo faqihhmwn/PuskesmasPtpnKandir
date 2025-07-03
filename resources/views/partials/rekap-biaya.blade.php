@@ -92,24 +92,23 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Contoh satu baris, lanjutkan Jan–Dec -->
-          <tr>
-            <td><input type="text" value="Jan" name="data[Jan][bulan]" readonly></td>
-            <td><input type="number" name="data[Jan][gol_3_4]"></td>
-            <td><input type="number" name="data[Jan][gol_1_2]"></td>
-            <td><input type="number" name="data[Jan][kampanye]"></td>
-            <td><input type="number" name="data[Jan][honor]"></td>
-            <td><input type="number" name="data[Jan][pens_3_4]"></td>
-            <td><input type="number" name="data[Jan][pens_1_2]"></td>
-            <td><input type="number" name="data[Jan][direksi]"></td>
-            <td><input type="number" name="data[Jan][dekom]"></td>
-            <td><input type="number" name="data[Jan][pengacara]"></td>
-            <td><input type="number" name="data[Jan][transport]"></td>
-            <td><input type="number" name="data[Jan][hiperkes]"></td>
-            <td><input type="number" name="data[Jan][total]"></td>
-          </tr>
+                                <tr>
+                        <td><input type="text" value="Jan" name="data[Jan][bulan]" readonly></td>
+                        <td><input type="number" name="data[Jan][gol_3_4]"></td>
+                        <td><input type="number" name="data[Jan][gol_1_2]"></td>
+                        <td><input type="number" name="data[Jan][kampanye]"></td>
+                        <td><input type="number" name="data[Jan][honor]"></td>
+                        <td><input type="number" name="data[Jan][pens_3_4]"></td>
+                        <td><input type="number" name="data[Jan][pens_1_2]"></td>
+                        <td><input type="number" name="data[Jan][direksi]"></td>
+                        <td><input type="number" name="data[Jan][dekom]"></td>
+                        <td><input type="number" name="data[Jan][pengacara]"></td>
+                        <td><input type="number" name="data[Jan][transport]"></td>
+                        <td><input type="number" name="data[Jan][hiperkes]"></td>
+                        <td><input type="number" name="data[Jan][total]"></td>
+                    </tr>
 
-          <tr>
+                    <tr>
                         <td><input type="text" value="Feb" name="data[Feb][bulan]" readonly></td>
                         <td><input type="number" name="data[Feb][gol_3_4]"></td>
                         <td><input type="number" name="data[Feb][gol_1_2]"></td>
@@ -278,7 +277,6 @@
                         <td><input type="number" name="data[Dec][total]"></td>
                     </tr>
 
-          <!-- Lanjutkan baris Feb sampai Dec dengan pola yang sama -->
         </tbody>
       </table>
 
