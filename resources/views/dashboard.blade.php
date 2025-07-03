@@ -184,7 +184,7 @@
     </div>
 
     <div class="nav-item">
-      <a href="/content/contact">Rekapitulasi Biaya</a>
+      <a href="/content/rekap-biaya">Rekapitulasi Biaya</a>
     </div>
   </div>
 
