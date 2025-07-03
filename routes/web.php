@@ -25,12 +25,6 @@ Route::get('/content/data-pasien', function () {
 Route::get('/content/contact', function () {
     return view('partials.contact');
 });
-use Illuminate\Support\Facades\Route;
-
-Route::get('/content/rekap-biaya', function () {
-    return view('content.rekap-biaya');
-});
-
 
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
