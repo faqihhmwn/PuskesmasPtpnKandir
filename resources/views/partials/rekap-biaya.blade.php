@@ -336,22 +336,22 @@
     }
 
   // Format angka menjadi format rupiah dengan titik
-    function formatRupiah(angka) {
+  function formatRupiah(angka) {
     return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
   // Hilangkan titik lalu ubah ke angka
-    function parseRupiah(rp) {
+  function parseRupiah(rp) {
     return parseInt(rp.replace(/\./g, '')) || 0;
   }
 
   // Hitung total untuk 1 baris
-    function hitungTotal(row) {
-      let total = 0;
-      const inputs = row.querySelectorAll('input');
-      inputs.forEach(input => {
-        const name = input.getAttribute('name') || '';
-        if (!name.includes('[bulan]') && !name.includes('[total]')) {
+  function hitungTotal(row) {
+    let total = 0;
+    const inputs = row.querySelectorAll('input');
+    inputs.forEach(input => {
+      const name = input.getAttribute('name') || '';
+      if (!name.includes('[bulan]') && !name.includes('[total]')) {
         const value = parseRupiah(input.value);
         total += value;
       }
@@ -362,10 +362,10 @@
     }
   }
 
-  // Format semua input dan tambahkan event listener.
-    document.querySelectorAll('tbody tr').forEach(row => {
-      const inputs = row.querySelectorAll('input');
-      inputs.forEach(input => {
+  // Format semua input dan tambahkan event listener
+  document.querySelectorAll('tbody tr').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    inputs.forEach(input => {
       const name = input.getAttribute('name') || '';
       if (!name.includes('[bulan]') && !name.includes('[total]')) {
         input.setAttribute('type', 'text'); // Ubah agar bisa tampil titik
@@ -377,6 +377,7 @@
       }
     });
   });
+
 </script>
 </body>
 </html>
