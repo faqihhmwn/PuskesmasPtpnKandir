@@ -158,19 +158,19 @@
             </tr>
 
             <tr>
-                        <td><input type="text" value="Mar" name="data[Mar][bulan]" readonly></td>
-                        <td><input type="number" name="data[Mar][gol_3_4]"></td>
-                        <td><input type="number" name="data[Mar][gol_1_2]"></td>
-                        <td><input type="number" name="data[Mar][kampanye]"></td>
-                        <td><input type="number" name="data[Mar][honor]"></td>
-                        <td><input type="number" name="data[Mar][pens_3_4]"></td>
-                        <td><input type="number" name="data[Mar][pens_1_2]"></td>
-                        <td><input type="number" name="data[Mar][direksi]"></td>
-                        <td><input type="number" name="data[Mar][dekom]"></td>
-                        <td><input type="number" name="data[Mar][pengacara]"></td>
-                        <td><input type="number" name="data[Mar][transport]"></td>
-                        <td><input type="number" name="data[Mar][hiperkes]"></td>
-                        <td><input type="number" name="data[Mar][total]"></td>
+              <td><input type="text" value="Mar" name="data[Mar][bulan]" readonly></td>
+              <td><input type="number" name="data[Mar][gol_3_4]"></td>
+              <td><input type="number" name="data[Mar][gol_1_2]"></td>
+              <td><input type="number" name="data[Mar][kampanye]"></td>
+              <td><input type="number" name="data[Mar][honor]"></td>
+              <td><input type="number" name="data[Mar][pens_3_4]"></td>
+              <td><input type="number" name="data[Mar][pens_1_2]"></td>
+              <td><input type="number" name="data[Mar][direksi]"></td>
+              <td><input type="number" name="data[Mar][dekom]"></td>
+              <td><input type="number" name="data[Mar][pengacara]"></td>
+              <td><input type="number" name="data[Mar][transport]"></td>
+              <td><input type="number" name="data[Mar][hiperkes]"></td>
+              <td><input type="number" name="data[Mar][total]"></td>
             </tr>
 
             <tr>
@@ -323,7 +323,7 @@
       </form>
     </div>
   </div>
-
+  
   <script>
     function scrollTable(direction) {
       const wrapper = document.getElementById("tableWrapper");
@@ -362,7 +362,7 @@
     }
   }
 
-  // Format semua input dan tambahkan event listener
+  // Format semua input dan tambahkan event listener.
     document.querySelectorAll('tbody tr').forEach(row => {
       const inputs = row.querySelectorAll('input');
       inputs.forEach(input => {
