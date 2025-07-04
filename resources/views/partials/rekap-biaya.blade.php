@@ -174,9 +174,9 @@
             </tr>
 
             <tr>
-                        <td><input type="text" value="Apr" name="data[Apr][bulan]" readonly></td>
-                        <td><input type="number" name="data[Apr][gol_3_4]"></td>
-                        <td><input type="number" name="data[Apr][gol_1_2]"></td>
+              <td><input type="text" value="Apr" name="data[Apr][bulan]" readonly></td>
+              <td><input type="number" name="data[Apr][gol_3_4]"></td>
+              <td><input type="number" name="data[Apr][gol_1_2]"></td>
                         <td><input type="number" name="data[Apr][kampanye]"></td>
                         <td><input type="number" name="data[Apr][honor]"></td>
                         <td><input type="number" name="data[Apr][pens_3_4]"></td>
@@ -363,20 +363,27 @@
   }
 
   // Format semua input dan tambahkan event listener
+document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('tbody tr').forEach(row => {
     const inputs = row.querySelectorAll('input');
     inputs.forEach(input => {
       const name = input.getAttribute('name') || '';
       if (!name.includes('[bulan]') && !name.includes('[total]')) {
-        input.setAttribute('type', 'text'); // Ubah agar bisa tampil titik
+        input.setAttribute('type', 'text'); // ubah agar bisa tampil titik
         input.addEventListener('input', function () {
           const angka = parseRupiah(this.value);
           this.value = formatRupiah(angka);
           hitungTotal(row);
         });
       }
+
+      if (name.includes('[total]')) {
+        input.setAttribute('type', 'text');
+        input.readOnly = true;
+      }
     });
   });
+});
 
 </script>
 </body>
