@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\UserController;
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -18,7 +20,7 @@ Route::get('/content/data-pengguna', function () {
     return view('partials.data-pengguna');
 });
 
-Route::get('/content/data-pasien', function (): Factory|View {
+Route::get('/content/data-pasien', function () {
     return view('partials.data-pasien');
 });
 
@@ -32,6 +34,28 @@ Route::get('/content/rekap-biaya', function () {
 
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
-Route::get('/content/data-obat', function () {
-    return view('partials.data-obat'); 
+// Obat Routes
+Route::prefix('obat')->name('obat.')->group(function () {
+    Route::get('/', [ObatController::class, 'index'])->name('index');
+    Route::get('/dashboard', [ObatController::class, 'dashboard'])->name('dashboard');
+    Route::get('/create', [ObatController::class, 'create'])->name('create');
+    Route::post('/', [ObatController::class, 'store'])->name('store');
+    Route::get('/{obat}', [ObatController::class, 'show'])->name('show');
+    Route::get('/{obat}/edit', [ObatController::class, 'edit'])->name('edit');
+    Route::put('/{obat}', [ObatController::class, 'update'])->name('update');
+    Route::delete('/{obat}', [ObatController::class, 'destroy'])->name('destroy');
+    
+    // Rekapitulasi
+    Route::get('/rekapitulasi/bulanan', [ObatController::class, 'rekapitulasi'])->name('rekapitulasi');
+    
+    // Transaksi
+    Route::post('/{obat}/transaksi', [ObatController::class, 'addTransaksi'])->name('transaksi.store');
+    Route::post('/{obat}/transaksi-harian', [ObatController::class, 'updateTransaksiHarian'])->name('transaksi.harian');
+    
+    // Import/Export
+    Route::post('/import', [ObatController::class, 'import'])->name('import');
+    Route::get('/export', [ObatController::class, 'exportExcel'])->name('export');
 });
+
+// Default redirect ke dashboard obat
+Route::redirect('/dashboard', '/obat/dashboard');

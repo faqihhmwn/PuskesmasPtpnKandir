@@ -4,8 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Puskesmas</title>
+  <title>@yield('title', 'Dashboard Puskesmas')</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -39,6 +41,7 @@
       padding-top: 20px;
       transition: transform 0.3s ease-in-out;
       box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
     }
 
     .sidenav a {
@@ -145,6 +148,27 @@
     .dropdown-toggle {
       cursor: pointer;
     }
+
+    /* Additional styles for obat pages */
+    .card {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border: none;
+      border-radius: 10px;
+    }
+
+    .btn {
+      border-radius: 8px;
+    }
+
+    .table {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .alert {
+      border-radius: 10px;
+      border: none;
+    }
   </style>
 </head>
 
@@ -160,7 +184,7 @@
     </div>
 
     <div class="nav-item">
-      <a href="/content/home" class="active">Home</a>
+      <a href="/content/home">Home</a>
     </div>
 
     <div class="nav-item">
@@ -180,11 +204,11 @@
     </div>
 
     <div class="nav-item dropdown">
-      <a href="#" class="dropdown-toggle">Farmasi</a>
+      <a href="#" class="dropdown-toggle {{ request()->routeIs('obat.*') ? 'active' : '' }}">Farmasi</a>
       <div class="dropdown-menu">
-        <a href="/obat">Dashboard Obat</a>
-        <a href="/obat/rekapitulasi">Rekapitulasi Obat</a>
-        <a href="/obat/create">Tambah Obat</a>
+        <a href="{{ route('obat.index') }}" class="{{ request()->routeIs('obat.index') ? 'active' : '' }}">Dashboard Obat</a>
+        <a href="{{ route('obat.rekapitulasi') }}" class="{{ request()->routeIs('obat.rekapitulasi') ? 'active' : '' }}">Rekapitulasi Obat</a>
+        <a href="{{ route('obat.create') }}" class="{{ request()->routeIs('obat.create') ? 'active' : '' }}">Tambah Obat</a>
       </div>
     </div>
 
@@ -204,76 +228,45 @@
   @endauth
 
   <div class="content">
-    <div id="content"></div>
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @yield('content')
   </div>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
-    const navLinks = document.querySelectorAll('.sidenav a');
-    const content = document.getElementById('content');
-    const sidenav = document.getElementById('sidenav');
-
-    function loadContent(url) {
-      fetch(url)
-        .then(res => res.text())
-        .then(data => {
-          content.innerHTML = data;
-        })
-        .catch(err => {
-          content.innerHTML = '<p>Gagal memuat konten.</p>';
-        });
-    }
-
-    function handleLogoClick() {
-      navLinks.forEach(link => link.classList.remove('active'));
-      document.querySelector('.sidenav a[href="/content/home"]')?.classList.add('active');
-      loadContent('/content/home');
-    }
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', function (e) {
-        // Jika ini adalah link dropdown farmasi, redirect langsung
-        if (this.getAttribute('href').startsWith('/obat')) {
-          window.location.href = this.getAttribute('href');
-          return;
-        }
-        
-        // Jika ini adalah dropdown toggle, jangan preventDefault
-        if (this.classList.contains('dropdown-toggle')) {
-          e.preventDefault();
-          return;
-        }
-        
-        e.preventDefault();
-        navLinks.forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-        loadContent(this.getAttribute('href'));
-        closeSidebar();
-      });
-    });
-
-    // Handle dropdown menu clicks for farmasi
-    document.querySelectorAll('.dropdown-menu a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        if (this.getAttribute('href').startsWith('/obat')) {
-          window.location.href = this.getAttribute('href');
-          return;
-        }
-      });
-    });
-
     function toggleSidebar() {
-      sidenav.classList.toggle('open');
+      document.getElementById('sidenav').classList.toggle('open');
     }
 
     function closeSidebar() {
       if (window.innerWidth <= 768) {
-        sidenav.classList.remove('open');
+        document.getElementById('sidenav').classList.remove('open');
       }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      loadContent('/content/home');
-    });
+    // Auto-hide alerts after 5 seconds
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert-dismissible');
+        alerts.forEach(alert => {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        });
+    }, 5000);
   </script>
 </body>
 
