@@ -30,6 +30,9 @@
     <div class="table-responsive">
         <form action="{{ route('rekap-biaya.store') }}" method="POST">
             @csrf
+            {{-- Tambahkan hidden input tahun dan unit di sini --}}
+            <input type="hidden" name="tahun" value="{{ $tahun }}">
+            <input type="hidden" name="unit" value="{{ $unit }}">
             <table class="table table-bordered text-center align-middle" style="background-color:white;">
                 <thead style="background-color:#003f66; color:white;">
                     <tr>

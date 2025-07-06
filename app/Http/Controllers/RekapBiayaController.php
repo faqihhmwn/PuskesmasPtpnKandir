@@ -28,6 +28,11 @@ class RekapBiayaController extends Controller
      */
     public function store(Request $request)
     {
+        // ✅ VALIDASI TAHUN DAN UNIT
+        $request->validate([
+            'tahun' => 'required|digits:4|integer|min:2000|max:' . date('Y'),
+            'unit' => 'required|in:Kedaton,Sukarame,Way Halim',
+        ]);
         $data = $request->input('data');
 
         foreach ($data as $row) {

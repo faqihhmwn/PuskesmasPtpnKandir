@@ -31,16 +31,15 @@ Route::get('/content/contact', function () {
     return view('partials.contact');
 });
 
-Route::get('/content/rekap-biaya', function () {
-    return view('partials.rekap-biaya');
-})->name('biaya.create');
-
 Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('pengguna.store');
 
 Route::get('/content/data-obat', function () {
     return view('partials.data-obat'); 
 });
 
-Route::get('/rekap', [RekapBiayaController::class, 'index'])->name('rekap-biaya.index');
-Route::post('/rekap/store', [RekapBiayaController::class, 'store'])->name('rekap-biaya.store');
+use App\Http\Controllers\RekapBiayaController;
+
+Route::get('/content/rekap-biaya', [RekapBiayaController::class, 'index'])->name('rekap-biaya.index');
+Route::post('/content/rekap-biaya', [RekapBiayaController::class, 'store'])->name('rekap-biaya.store');
+Route::get('/content/rekap-biaya/export', [RekapBiayaController::class, 'export'])->name('rekap-biaya.export');
 
