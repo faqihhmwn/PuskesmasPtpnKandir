@@ -155,14 +155,19 @@
           </thead>
           <tbody>
             
-            @foreach($bulanList as $index => $bulan)
             @php
-            $item = $data[$bulan] ?? null;
-            @endphp
-            <tr>
-              <td><input type="text" name="data[{{ $index }}][bulan]" value="{{ $bulan }}" readonly></td>
-
-
+              $bulanList = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+              @endphp
+              @foreach($bulanList as $index => $bulan)
+              
+              @php
+              $item = $data[$bulan] ?? null;
+              @endphp
+              <tr>
+                <td>
+                  <input type="text" name="data[{{ $index }}][bulan]" value="{{ $bulan }}" readonly>
+                </td>
+                
                 @foreach(['gol_3_4','gol_1_2','kampanye','honor','pens_3_4','pens_1_2','direksi','dekom','pengacara','transport','hiperkes'] as $field)
                   <td><input type="text" name="data[{{ $index }}][{{ $field }}]" class="rupiah-input"
                     value="{{ old("data.$index.$field", isset($item) ? number_format($item->$field, 0, ',', '.') : '') }}">
