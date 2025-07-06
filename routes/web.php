@@ -35,3 +35,5 @@ Route::post('/pengguna/tambah', [UserController::class, 'store'])->name('penggun
 Route::get('/content/data-obat', function () {
     return view('partials.data-obat'); 
 });
+
+Route::get('/rekap', [RekapBiayaController::class, 'index'])->name('rekap.index');
