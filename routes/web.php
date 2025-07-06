@@ -41,6 +41,6 @@ Route::get('/content/data-obat', function () {
     return view('partials.data-obat'); 
 });
 
-Route::get('/rekap', [RekapBiayaController::class, 'index'])->name('rekap.index');
+Route::get('/rekap', [RekapBiayaController::class, 'index'])->name('rekap-biaya.index');
 Route::post('/rekap/store', [RekapBiayaController::class, 'store'])->name('rekap-biaya.store');
 
