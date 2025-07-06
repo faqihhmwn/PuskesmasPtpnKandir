@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RekapBiayaController;
+
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -37,3 +42,5 @@ Route::get('/content/data-obat', function () {
 });
 
 Route::get('/rekap', [RekapBiayaController::class, 'index'])->name('rekap.index');
+Route::post('/rekap/store', [RekapBiayaController::class, 'store'])->name('rekap-biaya.store');
+
