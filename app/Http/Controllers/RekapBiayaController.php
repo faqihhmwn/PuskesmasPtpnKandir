@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RekapBiaya;
+use Illuminate\Support\Facades\Response;
 
 class RekapBiayaController extends Controller
 {
@@ -18,7 +19,8 @@ class RekapBiayaController extends Controller
         $data = RekapBiaya::where('tahun', $tahun)
             ->where('unit', $unit)
             ->orderByRaw("FIELD(bulan, 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')")
-            ->get();
+            ->get()
+            ->keyBy('bulan');
 
         return view('partials.rekap-biaya', compact('data', 'tahun', 'unit'));
     }
@@ -83,6 +85,48 @@ class RekapBiayaController extends Controller
 
         return response()->json(['message' => 'Data berhasil dihapus']);
     }
+
+    //Export CSV
+    public function export(Request $request)
+{
+    $tahun = $request->input('tahun');
+    $unit = $request->input('unit');
+
+    $data = RekapBiaya::where('tahun', $tahun)
+        ->where('unit', $unit)
+        ->orderByRaw("FIELD(bulan, 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')")
+        ->get();
+
+    $filename = "rekap-biaya-{$unit}-{$tahun}.csv";
+
+    $headers = [
+        "Content-type" => "text/csv",
+        "Content-Disposition" => "attachment; filename=$filename",
+        "Pragma" => "no-cache",
+        "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+        "Expires" => "0"
+    ];
+
+    $columns = ['Bulan', 'Gol. III-IV', 'Gol. I-II', 'Kampanye', 'Honor', 'Pens. III-IV', 'Pens. I-II', 'Direksi', 'Dekom', 'Pengacara', 'Transport', 'Hiperkes', 'Total'];
+
+    $callback = function () use ($data, $columns) {
+        $file = fopen('php://output', 'w');
+        fputcsv($file, $columns);
+
+        foreach ($data as $row) {
+            fputcsv($file, [
+                $row->bulan, $row->gol_3_4, $row->gol_1_2, $row->kampanye, $row->honor,
+                $row->pens_3_4, $row->pens_1_2, $row->direksi, $row->dekom, $row->pengacara,
+                $row->transport, $row->hiperkes, $row->total
+            ]);
+        }
+
+        fclose($file);
+    };
+
+    return Response::stream($callback, 200, $headers);
+}
+
 
     /**
      * Fungsi bantu: konversi format "1.000.000" ke integer

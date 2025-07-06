@@ -121,10 +121,16 @@
       <button type="submit">Tampilkan</button>
     </form>
 
-    <div class="scroll-buttons">
-      <button onclick="scrollTable('left')">⇦ Scroll Kiri</button>
-      <button onclick="scrollTable('right')">Scroll Kanan ⇨</button>
+    {{-- ✅ Tombol Export CSV --}}
+    @if(request('tahun') && request('unit'))
+    <div style="margin-bottom: 10px; text-align:right;">
+      <a href="{{ route('rekap-biaya.export', ['tahun' => request('tahun'), 'unit' => request('unit')]) }}"
+        class="btn btn-success"
+        style="background-color:#0077c0; color:white; padding: 8px 16px; border-radius: 5px; text-decoration: none;">
+        Export CSV
+      </a>
     </div>
+    @endif
 
     <div class="table-wrapper" id="tableWrapper">
       <form method="POST" action="{{ route('rekap-biaya.store') }}">
@@ -148,16 +154,23 @@
             </tr>
           </thead>
           <tbody>
-            @php
-              $bulanList = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            @endphp
+            
             @foreach($bulanList as $index => $bulan)
-              <tr>
-                <td><input type="text" name="data[{{ $index }}][bulan]" value="{{ $bulan }}" readonly></td>
+            @php
+            $item = $data[$bulan] ?? null;
+            @endphp
+            <tr>
+              <td><input type="text" name="data[{{ $index }}][bulan]" value="{{ $bulan }}" readonly></td>
+
+
                 @foreach(['gol_3_4','gol_1_2','kampanye','honor','pens_3_4','pens_1_2','direksi','dekom','pengacara','transport','hiperkes'] as $field)
-                  <td><input type="text" name="data[{{ $index }}][{{ $field }}]" class="rupiah-input"></td>
+                  <td><input type="text" name="data[{{ $index }}][{{ $field }}]" class="rupiah-input"
+                    value="{{ old("data.$index.$field", isset($item) ? number_format($item->$field, 0, ',', '.') : '') }}">
+                  </td>
                 @endforeach
-                <td><input type="text" name="data[{{ $index }}][total]" readonly></td>
+                <td><input type="text" name="data[{{ $index }}][total]" readonly
+                  value="{{ old("data.$index.total", isset($item) ? number_format($item->total, 0, ',', '.') : '') }}"
+                ></td>
               </tr>
             @endforeach
           </tbody>
