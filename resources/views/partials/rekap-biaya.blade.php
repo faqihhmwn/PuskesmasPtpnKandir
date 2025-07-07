@@ -114,9 +114,19 @@
       <input type="text" name="tahun" placeholder="Tahun (YYYY)" value="{{ request('tahun') }}" required pattern="\d{4}">
       <select name="unit" required>
         <option value="">-- Pilih Unit --</option>
+        <option value="Kandir" {{ request('unit') == 'Kandir' ? 'selected' : '' }}>Kandir</option>
+        <option value="Way Lima" {{ request('unit') == 'Way Lima' ? 'selected' : '' }}>Way Lima</option>
+        <option value="Way Berulu" {{ request('unit') == 'Way Berulu' ? 'selected' : '' }}>Way Berulu</option>
         <option value="Kedaton" {{ request('unit') == 'Kedaton' ? 'selected' : '' }}>Kedaton</option>
-        <option value="Sukarame" {{ request('unit') == 'Sukarame' ? 'selected' : '' }}>Sukarame</option>
-        <option value="Way Halim" {{ request('unit') == 'Way Halim' ? 'selected' : '' }}>Way Halim</option>
+        <option value="Bergen" {{ request('unit') == 'Bergen' ? 'selected' : '' }}>Bergen</option>
+        <option value="Tulang Buyut" {{ request('unit') == 'Tulungbuyut' ? 'selected' : '' }}>Tulang Buyut</option>
+        <option value="Musilandas" {{ request('unit') == 'Musilandas' ? 'selected' : '' }}>Musilandas</option>
+        <option value="Tebenan" {{ request('unit') == 'Tebenan' ? 'selected' : '' }}>Tebenan</option>
+        <option value="Beringin" {{ request('unit') == 'Beringin' ? 'selected' : '' }}>Beringin</option>
+        <option value="Padang Pelawi" {{ request('unit') == 'Padang Pelawi' ? 'selected' : '' }}>Padang Pelawi</option>
+        <option value="Ketahun" {{ request('unit') == 'Ketahun' ? 'selected' : '' }}>Ketahun</option>
+        <option value="Senabing" {{ request('unit') == 'Senabing' ? 'selected' : '' }}>Senabing</option>
+
       </select>
       <button type="submit">Tampilkan</button>
     </form>
@@ -144,12 +154,12 @@
               <th rowspan="2">Rekap Bulan</th>
               <th colspan="9" class="group-header">REAL BIAYA</th>
               <th rowspan="2">Transport</th>
-              <th rowspan="2">Hiperkes</th>
-              <th rowspan="2">Total</th>
+              <th rowspan="2"> Jml. Biaya Hiperkes</th>
+              <th rowspan="2">TOTAL BIAYA KESEHATAN</th>
             </tr>
             <tr>
               <th>Gol. III-IV</th><th>Gol. I-II</th><th>Kampanye</th>
-              <th>Honor + ILA</th><th>Pens. III-IV</th><th>Pens. I-II</th>
+              <th>Honor + ILA + OS</th><th>Pens. III-IV</th><th>Pens. I-II</th>
               <th>Direksi</th><th>Dekom</th><th>Pengacara</th>
             </tr>
           </thead>
