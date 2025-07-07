@@ -3,12 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Rekapitulasi Biaya Kesehatan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
-    body, input, select, button, table {
-      font-family: 'Poppins', sans-serif;
-    }
-
     .table-wrapper {
       overflow-x: auto;
       position: relative;
@@ -108,32 +103,9 @@
       border-radius: 5px;
       border: 1px solid #ccc;
     }
-
-    .total-row {
-      font-weight: bold;
-      background-color: #eef;
-    }
-
-    .jumlah-row {
-      background-color: #def;
-    }
-
-    .rekap-row {
-      background-color: #fdebd0;
-    }
-
-    .rekap-input,
-    .jumlah-input {
-      text-align: right;
-    }
-
-    .export-csv {
-      background-color: #28a745 !important;
-    }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h2 style="text-align:center;">Rekapitulasi Biaya Kesehatan</h2>
 
@@ -211,8 +183,8 @@
                     value="{{ old("data.$index.$field", isset($item) ? number_format($item->$field, 0, ',', '.') : '') }}">
                   </td>
                 @endforeach
-                <td><input type="text" name="data[{{ $index }}][total_biaya]" readonly
-                  value="{{ old("data.$index.total_biaya", isset($item) ? number_format($item->total_biaya, 0, ',', '.') : '') }}"
+                <td><input type="text" name="data[{{ $index }}][total]" readonly
+                  value="{{ old("data.$index.total", isset($item) ? number_format($item->total, 0, ',', '.') : '') }}"
                 ></td>
               </tr>
             @endforeach
@@ -245,19 +217,19 @@
       return parseInt(rp.replace(/\./g, '')) || 0;
     }
 
-    function hitungTotal_biaya(row) {
-      let total_biaya = 0;
+    function hitungTotal(row) {
+      let total = 0;
       const inputs = row.querySelectorAll('input');
       inputs.forEach(input => {
         const name = input.getAttribute('name') || '';
-        if (!name.includes('[bulan]') && !name.includes('[total_biaya]')) {
+        if (!name.includes('[bulan]') && !name.includes('[total]')) {
           const value = parseRupiah(input.value);
-          total_biaya += value;
+          total += value;
         }
       });
-      const total_biayaInput = row.querySelector('input[name$="[total_biaya]"]');
-      if (total_biayaInput) {
-        total_biayaInput.value = formatRupiah(total_biaya);
+      const totalInput = row.querySelector('input[name$="[total]"]');
+      if (totalInput) {
+        totalInput.value = formatRupiah(total);
       }
     }
 
@@ -265,12 +237,12 @@
       const inputs = row.querySelectorAll('input');
       inputs.forEach(input => {
         const name = input.getAttribute('name') || '';
-        if (!name.includes('[bulan]') && !name.includes('[total_biaya]')) {
+        if (!name.includes('[bulan]') && !name.includes('[total]')) {
           input.setAttribute('type', 'text');
           input.addEventListener('input', function () {
             const angka = parseRupiah(this.value);
             this.value = formatRupiah(angka);
-            hitungTotal_biaya(row);
+            hitungTotal(row);
           });
         }
       });
