@@ -69,7 +69,7 @@
                         <div class="col-md-2">
                             <a href="{{ route('obat.rekapitulasi') }}?export=1&periode=1" class="btn btn-secondary w-100 mb-2">
                                 <i class="fas fa-file-export"></i><br>
-                                Export CSV
+                                Export Excel
                             </a>
                         </div>
                     </div>
