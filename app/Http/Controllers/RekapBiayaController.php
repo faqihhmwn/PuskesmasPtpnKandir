@@ -56,7 +56,7 @@ class RekapBiayaController extends Controller
                     'pengacara' => $this->parseRupiah($row['pengacara'] ?? 0),
                     'transport' => $this->parseRupiah($row['transport'] ?? 0),
                     'hiperkes'  => $this->parseRupiah($row['hiperkes'] ?? 0),
-                    'total'     => $this->parseRupiah($row['total'] ?? 0)
+                    'total_biaya'     => $this->parseRupiah($row['total_biaya'] ?? 0)
                 ]
             );
         }
@@ -107,7 +107,7 @@ class RekapBiayaController extends Controller
         "Expires" => "0"
     ];
 
-    $columns = ['Bulan', 'Gol. III-IV', 'Gol. I-II', 'Kampanye', 'Honor', 'Pens. III-IV', 'Pens. I-II', 'Direksi', 'Dekom', 'Pengacara', 'Transport', 'Hiperkes', 'Total'];
+    $columns = ['Bulan', 'Gol. III-IV', 'Gol. I-II', 'Kampanye', 'Honor', 'Pens. III-IV', 'Pens. I-II', 'Direksi', 'Dekom', 'Pengacara', 'Transport', 'Hiperkes', 'Total Biaya Kesehatan'];
 
     $callback = function () use ($data, $columns) {
         $file = fopen('php://output', 'w');
@@ -117,7 +117,7 @@ class RekapBiayaController extends Controller
             fputcsv($file, [
                 $row->bulan, $row->gol_3_4, $row->gol_1_2, $row->kampanye, $row->honor,
                 $row->pens_3_4, $row->pens_1_2, $row->direksi, $row->dekom, $row->pengacara,
-                $row->transport, $row->hiperkes, $row->total
+                $row->transport, $row->hiperkes, $row->total_biaya
             ]);
         }
 
