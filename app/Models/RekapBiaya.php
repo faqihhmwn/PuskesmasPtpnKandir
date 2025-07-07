@@ -22,7 +22,7 @@ class RekapBiaya extends Model
         'pengacara',
         'transport',
         'hiperkes',
-        'total_biaya'
+        'total'
     ];
 }
 
