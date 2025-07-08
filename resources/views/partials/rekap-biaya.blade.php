@@ -188,6 +188,27 @@
                 ></td>
               </tr>
             @endforeach
+
+            <tr style="background-color: #f0f0f0; font-weight:bold;">
+              <td>TOTAL PER TAHUN</td>
+              @foreach(['gol_3_4','gol_1_2','kampanye','honor','pens_3_4','pens_1_2','direksi','dekom','pengacara','transport','hiperkes'] as $field)
+              <td><input type="text" id="total_{{ $field }}" readonly></td>
+              @endforeach
+              <td><input type="text" id="total_total" readonly></td>
+            </tr>
+
+            <tr style="background-color:#e0f7fa; font-weight:bold;">
+              <td>JUMLAH</td>
+              @foreach(['gol_3_4','gol_1_2','kampanye','honor','pens_3_4','pens_1_2','direksi','dekom','pengacara','transport','hiperkes'] as $field)
+                <td><input type="text" name="jumlah[{{ $field }}]" class="rupiah-input"
+                  value="{{ old("jumlah.$field", isset($jumlah) ? number_format($jumlah->$field, 0, ',', '.') : '') }}">
+                </td>
+              @endforeach
+              <td><input type="text" name="jumlah[total]" class="rupiah-input"
+                value="{{ old('jumlah.total', isset($jumlah) ? number_format($jumlah->total, 0, ',', '.') : '') }}"></td>
+            </tr>
+
+
           </tbody>
         </table>
 
@@ -247,6 +268,27 @@
         }
       });
     });
-  </script>
-</body>
-</html>
+    
+    function hitungTotalPerTahun() {
+      const fields = ['gol_3_4','gol_1_2','kampanye','honor','pens_3_4','pens_1_2','direksi','dekom','pengacara','transport','hiperkes','total'];
+      fields.forEach(field => {
+        let sum = 0;
+        document.querySelectorAll(`input[name^="data"][name$="[${field}]"]`).forEach(input => {
+          sum += parseRupiah(input.value);
+        });
+        const totalField = document.getElementById(`total_${field}`);
+        if (totalField) {
+          totalField.value = formatRupiah(sum);
+        }
+      });
+    }
+    
+    document.querySelectorAll('.rupiah-input').forEach(input => {
+      input.addEventListener('input', hitungTotalPerTahun);
+    });
+    
+    window.onload = hitungTotalPerTahun;
+    
+    </script>
+    </body>
+    </html>
