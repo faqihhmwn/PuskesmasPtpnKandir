@@ -10,7 +10,7 @@ class RekapBiaya extends Model
     protected $fillable = [
         'bulan',
         'tahun',
-        'unit',
+        'unit_id',
         'gol_3_4',
         'gol_1_2',
         'kampanye',
@@ -24,4 +24,11 @@ class RekapBiaya extends Model
         'hiperkes',
         'total'
     ];
+
+    public function unit()
+{
+    return $this->belongsTo(Unit::class);
 }
+
+}
+

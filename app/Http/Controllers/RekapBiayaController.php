@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\RekapBiaya;
 use App\Models\RekapJumlah;
 use Illuminate\Support\Facades\Response;
+use App\Models\Unit;
 
 class RekapBiayaController extends Controller
 {
@@ -18,7 +19,9 @@ class RekapBiayaController extends Controller
         $unit = $request->input('unit');
 
         $data = RekapBiaya::where('tahun', $tahun)
-            ->where('unit', $unit)
+            ->whereHas('unit', function ($query) use ($unit){
+                $query->where('name', $unit);
+            })
             ->orderByRaw("FIELD(bulan, 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')")
             ->get()
             ->keyBy('bulan');
@@ -37,6 +40,12 @@ class RekapBiayaController extends Controller
             'tahun' => 'required|digits:4|integer|min:2000|max:' . date('Y'),
             'unit' => 'required|in:Kedaton,Sukarame,Way Halim',
         ]);
+
+        $unit = Unit::where('name', $request->unit)->first();
+        if (!$unit) {
+            return back()->withErrors(['unit' => 'Unit tidak ditemukan']);
+}
+
         $data = $request->input('data');
 
         foreach ($data as $row) {
@@ -44,7 +53,7 @@ class RekapBiayaController extends Controller
                 [
                     'bulan' => $row['bulan'],
                     'tahun' => $request->input('tahun'),
-                    'unit' => $request->input('unit')
+                    'unit_id' => $unit->id
                 ],
                 [
                     'gol_3_4'   => $this->parseRupiah($row['gol_3_4'] ?? 0),
@@ -62,11 +71,13 @@ class RekapBiayaController extends Controller
                 ]
             );
         }
-            
+            //simpan rekap jumlah (manual)
             if ($request->has('jumlah')) {
-                $jumlah = $request->input('jumlah');
             RekapJumlah::updateOrCreate(
-                ['tahun' => $request->tahun, 'unit' => $request->unit],
+                ['tahun' => $request->tahun, 
+                'unit_id' => $unit->id
+            ],
+
                 [
                     'gol_3_4'   => $this->parseRupiah($request->input('jumlah.gol_3_4') ?? 0),
                     'gol_1_2'   => $this->parseRupiah($request->input('jumlah.gol_1_2') ?? 0),
@@ -117,9 +128,11 @@ class RekapBiayaController extends Controller
     $unit = $request->input('unit');
 
     $data = RekapBiaya::where('tahun', $tahun)
-        ->where('unit', $unit)
-        ->orderByRaw("FIELD(bulan, 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')")
-        ->get();
+    ->whereHas('unit', function ($query) use ($unit) {
+        $query->where('name', $unit);
+    })    
+    ->orderByRaw("FIELD(bulan, 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec')")
+    ->get();
 
     $filename = "rekap-biaya-{$unit}-{$tahun}.csv";
 

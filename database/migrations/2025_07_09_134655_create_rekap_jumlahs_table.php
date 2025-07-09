@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('rekap_jumlahs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->year('tahun');
-            $table->string('unit');
             $table->decimal('gol_3_4')->nullable();
             $table->decimal('gol_1_2')->nullable();
             $table->decimal('kampanye')->nullable();

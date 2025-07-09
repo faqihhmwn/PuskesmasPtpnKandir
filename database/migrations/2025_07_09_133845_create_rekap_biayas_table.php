@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('rekap_biayas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->string('bulan');
             $table->year('tahun');
-            $table->string('unit');
             $table->decimal('gol_3_4')->nullable();
             $table->decimal('gol_1_2')->nullable();
             $table->decimal('kampanye')->nullable();
@@ -33,4 +33,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('rekap_biayas');
     }
+    
 };
