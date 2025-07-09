@@ -24,9 +24,7 @@ class RekapBiayaController extends Controller
             ->keyBy('bulan');
 
         $jumlah = RekapJumlah::where('tahun', $tahun)->where('unit', $unit)->first();
-        
         return view('partials.rekap-biaya', compact('data', 'tahun', 'unit', 'jumlah'));
-
     }
 
     /**
@@ -63,7 +61,10 @@ class RekapBiayaController extends Controller
                     'total'     => $this->parseRupiah($row['total'] ?? 0)
                 ]
             );
-
+        }
+            
+            if ($request->has('jumlah')) {
+                $jumlah = $request->input('jumlah');
             RekapJumlah::updateOrCreate(
                 ['tahun' => $request->tahun, 'unit' => $request->unit],
                 [
@@ -79,8 +80,8 @@ class RekapBiayaController extends Controller
                     'transport' => $this->parseRupiah($request->input('jumlah.transport') ?? 0),
                     'hiperkes'  => $this->parseRupiah($request->input('jumlah.hiperkes') ?? 0),
                     'total'     => $this->parseRupiah($request->input('jumlah.total') ?? 0),
-                    ]
-                );
+                ]
+            );
 
         }
 

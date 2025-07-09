@@ -290,5 +290,5 @@
     window.onload = hitungTotalPerTahun;
     
     </script>
-    </body>
-    </html>
+</body>
+</html>

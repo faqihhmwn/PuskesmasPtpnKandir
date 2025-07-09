@@ -25,4 +25,3 @@ class RekapBiaya extends Model
         'total'
     ];
 }
-
